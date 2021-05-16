@@ -5,35 +5,45 @@ class Leaves {
   float x;
   float n;
   float seed;
+  float offset;
+  float noiseVal;
+  float noiseScale = .02;
 
   Leaves(float x, float y) {
-     n = noise(x) * .02;
+     
   
     
     position = new PVector(x, y);
     velocity = new PVector(0, 0); 
-    gravity = new PVector(0, .0);
-    //wind = new PVector(random(.0, .01), .0);
-    gusts = new PVector(n,n);
+    gravity = new PVector(0, 1);
+    wind = new PVector(0, 0);
+    gusts = new PVector(0, offset);
     println(x);
     life = 400;
-  
+    seed = random(.01);
   }
 
 
-  void run() {
-    update();
-    display();
+  //void run() {
+  //  update();
+  //  display();
     
-    //edges();
-  }
+  //  //edges();
+  //}
 
   
   void update() {
-    velocity.add(gravity).add(gusts); //add(wind).
-    position.add(velocity);
+    
+   //noiseDetail(1,.9);
+   float noiz = noise((position.y)*noiseScale);
+   position.add(noiz, 0).add(gravity).add(wind);
+   wind.add(seed, 0); 
+    
+    println(position);
     life -= 1;
-    x += .01;
+    x += .005;
+    //wind.add(seed, 0);
+    
   }
    
   

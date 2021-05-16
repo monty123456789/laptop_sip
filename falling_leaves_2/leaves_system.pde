@@ -15,9 +15,12 @@ class LeavesSystem {
   
 
   void run() {
+    
     for (int i = leavesN.size()-1; i >= 0; i--) {
       Leaves n = leavesN.get(i);
-      n.run();
+      n.update();
+      n.display();
+      //n.edges();
       if (n.isDead()) {
         leavesN.remove(i);
       }
